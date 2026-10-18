@@ -1,24 +1,35 @@
 name: Build FBNeo Android APK
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
+
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '17'
         cache: 'gradle'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew || true
-    - name: Build Debug APK with Gradle
+
+    - name: Build Debug APK
       run: |
         if [ -f "gradlew" ]; then
           ./gradlew assembleDebug
@@ -26,8 +37,21 @@ jobs:
           gradle wrapper
           ./gradlew assembleDebug
         fi
-    - name: Upload APK Artifact
+
+    - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
         name: fbneo-android-apk
         path: app/build/outputs/apk/debug/*.apk
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: "v1.0-${{ github.run_number }}"
+        name: "FBNeo Android Build #${{ github.run_number }}"
+        body: "Automated test APK build with Android SDK configured."
+        draft: false
+        prerelease: false
+        files: app/build/outputs/apk/debug/*.apk
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
