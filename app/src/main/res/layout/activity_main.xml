@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+    <SurfaceView
+        android:id="@+id/emulation_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <Button
+        android:id="@+id/btn_lp"
+        android:layout_width="60dp" android:layout_height="60dp" android:text="LP"
+        app:layout_constraintBottom_toTopOf="@id/btn_lk" app:layout_constraintEnd_toStartOf="@id/btn_mp" />
+    <Button
+        android:id="@+id/btn_mp"
+        android:layout_width="60dp" android:layout_height="60dp" android:text="MP"
+        app:layout_constraintBottom_toTopOf="@id/btn_mk" app:layout_constraintEnd_toStartOf="@id/btn_hp" />
+    <Button
+        android:id="@+id/btn_hp"
+        android:layout_width="60dp" android:layout_height="60dp" android:text="HP"
+        app:layout_constraintBottom_toTopOf="@id/btn_hk" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp" />
+    <Button
+        android:id="@+id/btn_lk"
+        android:layout_width="60dp" android:layout_height="60dp" android:text="LK"
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/btn_mk" android:layout_marginBottom="32dp" />
+    <Button
+        android:id="@+id/btn_mk"
+        android:layout_width="60dp" android:layout_height="60dp" android:text="MK"
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/btn_hk" android:layout_marginBottom="32dp" />
+    <Button
+        android:id="@+id/btn_hk"
+        android:layout_width="60dp" android:layout_height="60dp" android:text="HK"
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="32dp" android:layout_marginEnd="32dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
